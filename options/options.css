@@ -1,0 +1,168 @@
+/* options.css
+   Theming with CSS custom properties. Light values are the default. A
+   prefers-color-scheme:dark block overrides them so theme "auto" needs no JS.
+   For a manual override, options.js sets data-theme="light"|"dark" on <html>;
+   the [data-theme=...] selectors below have higher specificity than the media
+   query, so they win regardless of the OS setting. */
+
+:root {
+  --bg: #f6f7f9;
+  --card-bg: #ffffff;
+  --text: #1c1e21;
+  --muted: #5c6370;
+  --border: #d5d9df;
+  --accent: #1a73e8;
+  --accent-text: #ffffff;
+  --ok: #147a3d;
+  --err: #c5221f;
+  --field-bg: #ffffff;
+}
+
+/* Dark values when the OS asks for dark AND the user hasn't forced a theme. */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #1b1d1f;
+    --card-bg: #26282b;
+    --text: #e6e8ea;
+    --muted: #a4abb3;
+    --border: #3a3d41;
+    --accent: #8ab4f8;
+    --accent-text: #10233f;
+    --ok: #6ee7a0;
+    --err: #ff7b72;
+    --field-bg: #1f2124;
+  }
+}
+
+/* Manual override: forced light. Higher specificity beats the media query. */
+:root[data-theme="light"] {
+  --bg: #f6f7f9;
+  --card-bg: #ffffff;
+  --text: #1c1e21;
+  --muted: #5c6370;
+  --border: #d5d9df;
+  --accent: #1a73e8;
+  --accent-text: #ffffff;
+  --ok: #147a3d;
+  --err: #c5221f;
+  --field-bg: #ffffff;
+}
+
+/* Manual override: forced dark. */
+:root[data-theme="dark"] {
+  --bg: #1b1d1f;
+  --card-bg: #26282b;
+  --text: #e6e8ea;
+  --muted: #a4abb3;
+  --border: #3a3d41;
+  --accent: #8ab4f8;
+  --accent-text: #10233f;
+  --ok: #6ee7a0;
+  --err: #ff7b72;
+  --field-bg: #1f2124;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 14px/1.5 system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+}
+
+.wrap {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 24px 16px 64px;
+}
+
+h1 { font-size: 22px; margin: 0 0 4px; }
+.sub { color: var(--muted); margin: 0 0 20px; }
+
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 16px 18px;
+  margin-bottom: 16px;
+}
+
+.card h2 { font-size: 16px; margin: 0 0 12px; }
+
+.field { margin: 12px 0; }
+.field label { display: block; font-weight: 600; margin-bottom: 4px; }
+
+input[type="text"],
+input[type="time"],
+input[type="number"],
+select {
+  width: 100%;
+  max-width: 360px;
+  padding: 7px 9px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--field-bg);
+  color: var(--text);
+  font: inherit;
+}
+
+input[type="file"] { color: var(--text); }
+
+.switch-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  margin: 8px 0;
+}
+.switch-row input { width: auto; }
+
+fieldset.mode {
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  margin: 12px 0;
+  padding: 8px 12px;
+}
+fieldset.mode legend { font-weight: 600; padding: 0 4px; }
+fieldset.mode label { display: block; font-weight: 400; margin: 4px 0; }
+
+button {
+  background: var(--accent);
+  color: var(--accent-text);
+  border: none;
+  border-radius: 6px;
+  padding: 8px 16px;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+button:disabled { opacity: 0.5; cursor: default; }
+button:focus-visible,
+input:focus-visible,
+select:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.row { display: flex; align-items: center; gap: 12px; margin-top: 12px; flex-wrap: wrap; }
+
+.inline-msg { color: var(--muted); }
+.inline-msg.ok { color: var(--ok); }
+.inline-msg.err { color: var(--err); }
+
+.note { color: var(--muted); font-size: 13px; margin: 8px 0 0; }
+
+.field-msg { font-size: 13px; margin: 4px 0 0; min-height: 1em; }
+.field-msg.err { color: var(--err); }
+.field-msg.warn { color: var(--muted); }
+.field-msg.ok { color: var(--ok); }
+
+.status-grid {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 4px 16px;
+  margin: 0 0 12px;
+}
+.status-grid dt { color: var(--muted); }
+.status-grid dd { margin: 0; word-break: break-word; }
+
+#st-result.ok { color: var(--ok); font-weight: 600; }
+#st-result.err { color: var(--err); font-weight: 600; }

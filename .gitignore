@@ -1,0 +1,6 @@
+# Python bytecode from the test harness
+__pycache__/
+*.pyc
+
+# Local scratch (not part of the project)
+*.tmp

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Privacy Policy — SBB - Simple Bookmarks Backup</title>
+  <style>
+    :root { color-scheme: light dark; }
+    body {
+      max-width: 760px; margin: 0 auto; padding: 40px 20px 80px;
+      font: 16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      color: #1c1e21; background: #ffffff;
+    }
+    @media (prefers-color-scheme: dark) {
+      body { color: #e6e8ea; background: #1b1d1f; }
+      code { background: #26282b; }
+      a { color: #8ab4f8; }
+    }
+    h1 { font-size: 26px; margin-bottom: 4px; }
+    h2 { font-size: 19px; margin-top: 32px; }
+    .updated { color: #777; margin-top: 0; }
+    code { background: #f0f1f3; padding: 1px 5px; border-radius: 4px; }
+    ul { padding-left: 22px; }
+    li { margin: 6px 0; }
+  </style>
+</head>
+<body>
+  <h1>Privacy Policy — SBB - Simple Bookmarks Backup</h1>
+  <p class="updated">Last updated: July 1, 2026</p>
+
+  <p>
+    SBB - Simple Bookmarks Backup is a Chrome extension that saves compressed,
+    timestamped snapshots of your bookmarks to a folder in your own Downloads
+    directory, and can restore them. This policy explains exactly what the
+    extension does with your data.
+  </p>
+
+  <h2>The short version</h2>
+  <ul>
+    <li>The extension does <strong>not</strong> collect, transmit, sell, or share any of your data.</li>
+    <li>It makes <strong>no network requests</strong> of any kind.</li>
+    <li>Everything it reads or writes stays <strong>on your own device</strong>.</li>
+    <li>There are no analytics, no tracking, no remote servers, and no third parties.</li>
+  </ul>
+
+  <h2>What data the extension accesses</h2>
+  <p>To do its job the extension reads and writes the following, all locally:</p>
+  <ul>
+    <li>
+      <strong>Your bookmarks.</strong> It reads your bookmark tree to create a
+      backup, and (only when you explicitly run a restore) it creates new
+      bookmarks from a backup file. Restore is non-destructive: it adds a new
+      folder and never deletes, moves, or overwrites your existing bookmarks.
+    </li>
+    <li>
+      <strong>Backup files.</strong> Snapshots are written to a folder inside your
+      browser's Downloads directory (default <code>chrome-bookmarks-backup</code>).
+      These files live on your device. If you have separately configured your
+      Downloads folder to sync to a cloud service, that is your own setup and
+      outside this extension's control.
+    </li>
+    <li>
+      <strong>Your settings and run status.</strong> Your preferences (schedule,
+      directory, compression, etc.) are stored using Chrome's extension storage.
+      Settings use <code>chrome.storage.sync</code>, which Chrome may sync across
+      your own signed-in devices; this is handled entirely by Chrome, not by us,
+      and is never sent to the developer. Per-device status (last run time, last
+      result) is stored locally.
+    </li>
+  </ul>
+
+  <h2>What data is sent off your device</h2>
+  <p>
+    <strong>None.</strong> The extension has no server, makes no network calls, and
+    contains no remote or third-party code. It requests no host permissions, so it
+    cannot contact any website.
+  </p>
+
+  <h2>Permissions and why they are needed</h2>
+  <ul>
+    <li><strong>bookmarks</strong> — read your bookmarks to back them up; create bookmarks on restore.</li>
+    <li><strong>downloads</strong> — write backup files into your Downloads folder.</li>
+    <li><strong>alarms</strong> — trigger backups on your chosen schedule.</li>
+    <li><strong>storage</strong> — save your settings and the last-run status.</li>
+    <li><strong>notifications</strong> — show a desktop notification if a backup fails.</li>
+  </ul>
+
+  <h2>Data retention and deletion</h2>
+  <ul>
+    <li>
+      Backup files remain on your device until you delete them, or until the
+      optional retention feature (off by default) prunes older snapshots you created.
+    </li>
+    <li>
+      Uninstalling the extension removes its settings and status. Backup files
+      already written to your Downloads folder are yours and are not removed by
+      uninstalling.
+    </li>
+  </ul>
+
+  <h2>Children's privacy</h2>
+  <p>The extension collects no personal information from anyone, including children.</p>
+
+  <h2>Changes to this policy</h2>
+  <p>
+    If this policy changes, the updated version will be posted at this same
+    location with a new "Last updated" date.
+  </p>
+
+  <h2>Contact</h2>
+  <p>
+    Questions about this policy can be directed to the developer through the
+    extension's Chrome Web Store listing support channel.
+  </p>
+</body>
+</html>

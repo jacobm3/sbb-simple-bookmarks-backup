@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Simple Bookmarks Backup — Options</title>
+  <link rel="stylesheet" href="options.css" />
+</head>
+<body>
+  <main class="wrap">
+    <h1>Simple Bookmarks Backup</h1>
+    <p class="sub">
+      Local, compressed snapshots of your bookmarks for recovery from accidental
+      deletion. Nothing is ever sent over the network.
+    </p>
+
+    <!-- ============ Status ============ -->
+    <section class="card" aria-labelledby="status-h">
+      <h2 id="status-h">Status</h2>
+      <dl class="status-grid">
+        <dt>Last run</dt><dd id="st-lastrun">—</dd>
+        <dt>Result</dt><dd id="st-result">—</dd>
+        <dt>Last file</dt><dd id="st-file">—</dd>
+        <dt>Format</dt><dd id="st-format">—</dd>
+        <dt>Error</dt><dd id="st-error">—</dd>
+      </dl>
+      <div class="row">
+        <button id="backup-now" type="button">Back up now</button>
+        <span id="backup-msg" class="inline-msg" role="status" aria-live="polite"></span>
+      </div>
+      <p class="note">
+        Scheduled backups only fire while Chrome is running. A "daily" backup that
+        was due while Chrome was closed runs shortly after the next launch.
+      </p>
+    </section>
+
+    <!-- ============ Schedule ============ -->
+    <section class="card" aria-labelledby="sched-h">
+      <h2 id="sched-h">Schedule</h2>
+
+      <label class="switch-row">
+        <input type="checkbox" id="enabled" />
+        <span>Enable scheduled backups</span>
+      </label>
+
+      <fieldset class="mode">
+        <legend>Mode</legend>
+        <label><input type="radio" name="scheduleMode" value="daily" /> Daily at a fixed time</label>
+        <label><input type="radio" name="scheduleMode" value="interval" /> Every N hours</label>
+      </fieldset>
+
+      <div class="field" id="daily-field">
+        <label for="dailyTime">Daily time (24-hour)</label>
+        <input type="time" id="dailyTime" />
+      </div>
+
+      <div class="field" id="interval-field">
+        <label for="intervalHours">Interval (hours)</label>
+        <input type="number" id="intervalHours" min="1" step="1" />
+      </div>
+    </section>
+
+    <!-- ============ Output ============ -->
+    <section class="card" aria-labelledby="out-h">
+      <h2 id="out-h">Output</h2>
+
+      <div class="field">
+        <label for="backupDir">Backup directory (relative to Downloads)</label>
+        <input type="text" id="backupDir" spellcheck="false" />
+        <p class="field-msg" id="backupDir-msg"></p>
+      </div>
+
+      <div class="field">
+        <label for="compression">Compression</label>
+        <select id="compression">
+          <option value="auto">Auto (zstd if available, else gzip)</option>
+          <option value="gzip">Gzip</option>
+          <option value="none">None (plain JSON)</option>
+        </select>
+        <p class="note" id="zstd-note"></p>
+      </div>
+    </section>
+
+    <!-- ============ Retention ============ -->
+    <section class="card" aria-labelledby="ret-h">
+      <h2 id="ret-h">Retention</h2>
+      <label class="switch-row">
+        <input type="checkbox" id="retentionEnabled" />
+        <span>Automatically delete old snapshots</span>
+      </label>
+      <div class="field" id="retention-field">
+        <label for="retentionKeep">Keep newest</label>
+        <input type="number" id="retentionKeep" min="1" step="1" />
+      </div>
+      <p class="note">
+        Off by default. Only ever deletes snapshots this extension created — never
+        touches your other downloads.
+      </p>
+    </section>
+
+    <!-- ============ Notifications ============ -->
+    <section class="card" aria-labelledby="notif-h">
+      <h2 id="notif-h">Notifications</h2>
+      <label class="switch-row">
+        <input type="checkbox" id="notifyOnFailure" />
+        <span>Show a desktop notification when a backup fails</span>
+      </label>
+      <p class="note">Successful backups are silent.</p>
+    </section>
+
+    <!-- ============ Appearance ============ -->
+    <section class="card" aria-labelledby="theme-h">
+      <h2 id="theme-h">Appearance</h2>
+      <div class="field">
+        <label for="theme">Theme</label>
+        <select id="theme">
+          <option value="auto">Auto (follow system)</option>
+          <option value="light">Light</option>
+          <option value="dark">Dark</option>
+        </select>
+      </div>
+    </section>
+
+    <!-- ============ Restore ============ -->
+    <section class="card" aria-labelledby="restore-h">
+      <h2 id="restore-h">Restore from file</h2>
+      <p class="note">
+        Restoring is non-destructive: it recreates the backup inside a new folder
+        under <strong>Other Bookmarks</strong>. Your existing bookmarks are never
+        changed. Drag out what you need.
+      </p>
+      <div class="field">
+        <label for="restoreFile">Choose a backup file (.zst, .gz, or .json)</label>
+        <input type="file" id="restoreFile" accept=".zst,.gz,.json" />
+      </div>
+      <p class="field-msg" id="restore-summary"></p>
+      <div class="row">
+        <button id="restore-run" type="button" disabled>Restore now</button>
+        <span id="restore-msg" class="inline-msg" role="status" aria-live="polite"></span>
+      </div>
+    </section>
+  </main>
+
+  <script type="module" src="options.js"></script>
+</body>
+</html>
