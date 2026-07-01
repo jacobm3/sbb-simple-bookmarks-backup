@@ -1,4 +1,4 @@
-# Bookmark Backup — Chrome Extension
+# SBB - Simple Bookmarks Backup — Chrome Extension
 
 Manifest V3 extension that writes dated, compressed snapshots of your bookmarks
 to a folder in Downloads on a schedule, for recovery from accidental deletion.
